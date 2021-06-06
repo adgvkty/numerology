@@ -1,4 +1,4 @@
-package complex
+package main
 
 import (
 	"fmt"
@@ -83,7 +83,7 @@ var dateFormatString string
 
 //Core - главная функция, отвечает за вызов всех меню
 //С соответствующими аргументами
-func Core() {
+func main() {
 	for {
 		mainMenu()
 		userDate := dateMenu()

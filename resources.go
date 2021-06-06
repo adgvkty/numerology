@@ -1,4 +1,4 @@
-package complex
+package main
 
 //DestinyText глобальный типа данных для текстов
 type DestinyText struct {
