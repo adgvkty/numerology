@@ -127,6 +127,7 @@ func mainMenu() {
 		response := userInput.scanInt()
 		switch response {
 		case 0:
+			fmt.Println(basicError)
 			continue
 		case 1:
 			return
