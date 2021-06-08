@@ -56,7 +56,6 @@ var userDate dateFormat = dateFormat{}
 
 //Core выполняет роль главной функции программы
 func Core() {
-
 	for {
 		mainMenu()
 		userDateValues := dateMenu()
@@ -98,7 +97,7 @@ func destinyMenu(d int) {
 	fmt.Printf("\nЭто число равняется - %v\nСейчас они расскажут Вам всё, что они знают..\n", d)
 	time.Sleep(2 * time.Second)
 	destiny := resources[d]
-	fmt.Printf("%s %s %s %s",
+	fmt.Printf("\n%s\n%s\n%s\n%s",
 		destiny.destinyChar,
 		destiny.destinyPros,
 		destiny.destinyCons,
@@ -113,7 +112,8 @@ func dateMenu() dateValues {
 			chooseDate()
 		}
 		response := getDate()
-		if response.day == 0 && response.month == 0 && response.year == 0 {
+		if response.day == 0 || response.month == 0 {
+			fmt.Println(basicError)
 			continue
 		}
 		return response
