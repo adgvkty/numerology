@@ -1,4 +1,4 @@
-package version2
+package app
 
 import "fmt"
 

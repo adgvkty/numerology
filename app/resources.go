@@ -1,4 +1,4 @@
-package version2
+package app
 
 //DestinyText глобальный типа данных для текстов
 type DestinyText struct {
