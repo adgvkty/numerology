@@ -10,7 +10,7 @@ type DestinyText struct {
 
 //LoadResources загружает ресурсы (тексты)
 //в картуmap[int]DestinyText
-func LoadResources() map[int]DestinyText {
+func loadResources() map[int]DestinyText {
 
 	//создание карты с 9 значениями для возврата текстов
 	DestinyTexts := make(map[int]DestinyText, 9)

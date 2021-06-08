@@ -7,15 +7,16 @@ import (
 
 //Тип для хранения магических чисел
 type magicNumbers struct {
-	nOne, nTwo, nThree, nFour, destinyNum int
+	One, Two, Three, Four, destinyNum int
 }
 
 //Метод подсчета магических чисел
-func (m magicNumbers) calcMagicNumbers(date DateValues) magicNumbers {
-	m.nOne = digitSum(date.day) + digitSum(date.month) + digitSum(date.year)
-	m.nTwo = digitSum(m.nOne)
-	m.nThree = m.nOne - date.day/10*2
-	m.nFour = digitSum(m.nThree)
+func (m magicNumbers) calcMagicNumbers(date dateValues) magicNumbers {
+	m.One = digitSum(date.day) + digitSum(date.month) + digitSum(date.year)
+	m.Two = digitSum(m.One)
+	m.Three = m.One - date.day/10*2
+	m.Four = digitSum(m.Three)
+
 	m.destinyNum = digitSum(digitSum(date.day) + digitSum(date.month) + digitSum(date.year))
 	for m.destinyNum >= 10 {
 		m.destinyNum = digitSum(m.destinyNum)
@@ -30,16 +31,16 @@ type magicStrings struct {
 }
 
 //Метод для подсчета магических строк
-func (m magicStrings) calcMagicStrings(mN magicNumbers, date DateValues) magicStrings {
-	str := []string{toStr(date.day), toStr(date.month), toStr(date.year)}
-	m.birthdayString = strings.Join(str, "")
-	str = []string{toStr(mN.nOne), toStr(mN.nTwo), toStr(mN.nThree), toStr(mN.nFour)}
-	m.magicString = strings.Join(str, "")
+func (m magicStrings) calcMagicStrings(magicN magicNumbers, date dateValues) magicStrings {
+	dateString := []string{toStr(date.day), toStr(date.month), toStr(date.year)}
+	m.birthdayString = strings.Join(dateString, "")
+	numbersString := []string{toStr(magicN.One), toStr(magicN.Two), toStr(magicN.Three), toStr(magicN.Four)}
+	m.magicString = strings.Join(numbersString, "")
 	return m
 }
 
-//MagicValues структура для хранения всех магических значений
-type MagicValues struct {
+//magicValues структура для хранения всех магических значений
+type magicValues struct {
 	magicNumbers
 	magicStrings
 }

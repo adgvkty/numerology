@@ -7,52 +7,52 @@ import (
 )
 
 //Подгрузка ресурсов в карту
-var resources map[int]DestinyText = LoadResources()
+var resources map[int]DestinyText = loadResources()
 
 //Переменная для хранения стандратной ошибки
 var basicError string = "Вы ввели что-то не то"
 
-//UserInputInterface - интерфейс для вводимых юзером данных
-type UserInputInterface interface {
+//userInputInterface - интерфейс для вводимых юзером данных
+type userInputInterface interface {
 	scanInt() int8
-	scanDate() DateValues
+	scanDate() dateValues
 }
 
-//MagicCalculationsInterface - интерфейс описывающий магические калькуляции
-type MagicCalculationsInterface interface {
-	calcMagicNumbers(DateValues) magicNumbers
-	calcMagicStrings(magicNumbers, DateValues) magicStrings
+//magicCalculationsInterface - интерфейс описывающий магические калькуляции
+type magicCalculationsInterface interface {
+	calcMagicNumbers(dateValues) magicNumbers
+	calcMagicStrings(magicNumbers, dateValues) magicStrings
 }
 
-//CompatibilityCalculationsInterface - интерфейс описывающий магические калькуляции
-type CompatibilityCalculationsInterface interface {
+//compatibilityCalculationsInterface - интерфейс описывающий магические калькуляции
+type compatibilityCalculationsInterface interface {
 	calcComp(magicStrings, magicStrings) int
 }
 
-//CompCalcilations структура данных через которую считается совместимость
-var CompCalcilations CompatibilityCalculationsInterface = Compitability{}
+//compCalculations структура данных через которую считается совместимость
+var compCalculations compatibilityCalculationsInterface = Compitability{}
 
-//MagicCalculations структура данных через которую считают маг. числа
-var MagicCalculations MagicCalculationsInterface = MagicValues{}
+//magicCalculations структура данных через которую считают маг. числа
+var magicCalculations magicCalculationsInterface = magicValues{}
 
-//UserInput сруктура данных через которую осуществляется ввод
-var UserInput UserInputInterface = ConsoleInput{}
+//userInput сруктура данных через которую осуществляется ввод
+var userInput userInputInterface = consoleInput{}
 
-//DateFormat структура для хранения
+//dateFormat структура для хранения
 //Выбранного юзером типа времени
-type DateFormat struct {
+type dateFormat struct {
 	userDate       int8
 	userDateString string
 }
 
-//DateValues хранит числовые значения дня рождения юзера
-type DateValues struct {
+//dateValues хранит числовые значения дня рождения юзера
+type dateValues struct {
 	day, month, year int
 }
 
-//UserDate является структурой для хранения
+//userDate является структурой для хранения
 //типа выбраного времени юзером
-var UserDate DateFormat = DateFormat{}
+var userDate dateFormat = dateFormat{}
 
 //Core выполняет роль главной функции программы
 func Core() {
@@ -60,8 +60,8 @@ func Core() {
 	for {
 		mainMenu()
 		userDateValues := dateMenu()
-		userMagicNumbers := MagicCalculations.calcMagicNumbers(userDateValues)
-		userMagicStrings := MagicCalculations.calcMagicStrings(userMagicNumbers, userDateValues)
+		userMagicNumbers := magicCalculations.calcMagicNumbers(userDateValues)
+		userMagicStrings := magicCalculations.calcMagicStrings(userMagicNumbers, userDateValues)
 		destinyMenu(userMagicNumbers.destinyNum)
 		time.Sleep(2 * time.Second)
 		compatibilityMenu(userMagicStrings)
@@ -69,17 +69,17 @@ func Core() {
 }
 
 //Меню совместимости - обработка ответа юзера и вызов расчетов
-func compatibilityMenu(uMS magicStrings) {
+func compatibilityMenu(userMS magicStrings) {
 	for {
 		fmt.Println("\nЖелаете ли Вы узнать совместимость со своей второй половинкой?\n\t1. Да\n\t2. Нет")
-		response := UserInput.scanInt()
+		response := userInput.scanInt()
 		if response == 2 {
 			return
 		}
-		pD := dateMenu()
-		pMN := MagicCalculations.calcMagicNumbers(pD)
-		pMS := MagicCalculations.calcMagicStrings(pMN, pD)
-		comp := CompCalcilations.calcComp(uMS, pMS)
+		partnerDate := dateMenu()
+		partnerMN := magicCalculations.calcMagicNumbers(partnerDate)
+		partnerMS := magicCalculations.calcMagicStrings(partnerMN, partnerDate)
+		comp := compCalculations.calcComp(userMS, partnerMS)
 		if comp >= 8 {
 			fmt.Println("Вы превосходно подходите друг-другу!!")
 		} else if comp >= 4 && comp <= 7 {
@@ -107,12 +107,12 @@ func destinyMenu(d int) {
 }
 
 //Меню даты - выбор юзером даты и ввод дня рождения
-func dateMenu() DateValues {
+func dateMenu() dateValues {
 	for {
-		if UserDate.userDate == 0 {
-			ChooseDate()
+		if userDate.userDate == 0 {
+			chooseDate()
 		}
-		response := GetDate()
+		response := getDate()
 		if response.day == 0 && response.month == 0 && response.year == 0 {
 			continue
 		}
@@ -124,7 +124,7 @@ func dateMenu() DateValues {
 func mainMenu() {
 	for {
 		fmt.Println("\nДобро пожаловать в Нумеролого-о-Метр!\n\t1. Начать работу\n\t2. Завершить работу")
-		response := UserInput.scanInt()
+		response := userInput.scanInt()
 		switch response {
 		case 0:
 			continue
@@ -137,7 +137,7 @@ func mainMenu() {
 }
 
 //ErrorCheck глобальная функция для проверки чего либо на ошибку
-func ErrorCheck(err error) bool {
+func errorCheck(err error) bool {
 	if err != nil {
 		fmt.Println(basicError)
 		return true

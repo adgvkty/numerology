@@ -3,26 +3,29 @@ package version2
 import "fmt"
 
 //GetDate отвечает за получение дня рождения от юзера
-func GetDate() DateValues {
+func getDate() dateValues {
 	for {
-		fmt.Printf("\nВведите дату рождения в формате %s:\n", UserDate.userDateString)
-		return UserInput.scanDate()
+		fmt.Printf("\nВведите дату рождения в формате %s:\n", userDate.userDateString)
+		return userInput.scanDate()
 	}
 }
 
 //ChooseDate отвечает за выбор юзером типа времени
-func ChooseDate() {
+func chooseDate() {
 	for {
 		fmt.Println("Формат даты:\n\t1. DD.MM.YEAR\n\t2. MM.DD.YEAR\n\t3. DD Месяц YEAR")
-		response := UserInput.scanInt()
-		UserDate.userDate = response
+		response := userInput.scanInt()
+		userDate.userDate = response
 		switch response {
 		case 1:
-			UserDate.userDateString = "DD.MM.YEAR"
+			userDate.userDateString = "DD.MM.YEAR"
 		case 2:
-			UserDate.userDateString = "MM.DD.YEAR"
+			userDate.userDateString = "MM.DD.YEAR"
 		case 3:
-			UserDate.userDateString = "DD Месяц YEAR"
+			userDate.userDateString = "DD Месяц YEAR"
+		default:
+			fmt.Println(basicError)
+			userDate.userDateString = ""
 		}
 		return
 	}

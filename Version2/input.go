@@ -5,42 +5,43 @@ import (
 	"strings"
 )
 
-//ConsoleInput структура вводимых в консоль данных
-type ConsoleInput struct {
-	UserInput     int8
-	UserDateInput int8
+//consoleInput структура вводимых в консоль данных
+type consoleInput struct {
+	UserInput int8
 }
 
 //Метод скана интового инпута
-func (c ConsoleInput) scanInt() int8 {
+func (c consoleInput) scanInt() int8 {
 	_, err := fmt.Scan(&c.UserInput)
-	if ErrorCheck(err) {
+	if errorCheck(err) {
 		return 0
 	}
 	return c.UserInput
 }
 
 //Метод скана вводимой строки с датой
-func (c ConsoleInput) scanDate() DateValues {
+func (c consoleInput) scanDate() dateValues {
+
 	var day, month, year int
 	var monthString string
-	switch UserDate.userDate {
+
+	switch userDate.userDate {
 	case 1:
 		_, err := fmt.Scanf("\n%d.%d.%d", &day, &month, &year)
-		if ErrorCheck(err) {
-			return DateValues{}
+		if errorCheck(err) {
+			return dateValues{}
 		}
-		return DateValues{day: day, month: month, year: year}
+		return dateValues{day: day, month: month, year: year}
 	case 2:
 		_, err := fmt.Scanf("\n%d.%d.%d", &day, &month, &year)
-		if ErrorCheck(err) {
-			return DateValues{}
+		if errorCheck(err) {
+			return dateValues{}
 		}
-		return DateValues{day: day, month: month, year: year}
+		return dateValues{day: day, month: month, year: year}
 	case 3:
 		_, err := fmt.Scan(&day, &monthString, &year)
-		if ErrorCheck(err) {
-			return DateValues{}
+		if errorCheck(err) {
+			return dateValues{}
 		}
 		monthString = strings.ToLower(monthString)
 		switch monthString {
@@ -69,8 +70,8 @@ func (c ConsoleInput) scanDate() DateValues {
 		case "декабрь", "декабря":
 			month = 12
 		}
-		return DateValues{day: day, month: month, year: year}
+		return dateValues{day: day, month: month, year: year}
 	default:
-		return DateValues{}
+		return dateValues{}
 	}
 }
