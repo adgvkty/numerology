@@ -19,14 +19,16 @@ func chooseDate() {
 		switch response {
 		case 1:
 			userDate.userDateString = "DD.MM.YEAR"
+			return
 		case 2:
 			userDate.userDateString = "MM.DD.YEAR"
+			return
 		case 3:
 			userDate.userDateString = "DD Месяц YEAR"
+			return
 		default:
 			fmt.Println(basicError)
 			userDate.userDateString = ""
 		}
-		return
 	}
 }

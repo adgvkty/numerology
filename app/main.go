@@ -81,12 +81,14 @@ func compatibilityMenu(userMS magicStrings) {
 		comp := compCalculations.calcComp(userMS, partnerMS)
 		if comp >= 8 {
 			fmt.Println("Вы превосходно подходите друг-другу!!")
+			return
 		} else if comp >= 4 && comp <= 7 {
 			fmt.Println("Вы неплохо подходите друг-другу!")
+			return
 		} else {
 			fmt.Println("Ваша совместимость не очень..")
+			return
 		}
-		return
 	}
 }
 

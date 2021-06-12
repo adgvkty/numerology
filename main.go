@@ -1,9 +1,9 @@
 package main
 
 import (
-	version2 "numerology/Version2"
+	"numerology/app"
 )
 
 func main() {
-	version2.Core()
+	app.Core()
 }
