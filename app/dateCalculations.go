@@ -2,7 +2,7 @@ package app
 
 import "fmt"
 
-//GetDate отвечает за получение дня рождения от юзера
+// GetDate отвечает за получение дня рождения от юзера
 func getDate() dateValues {
 	for {
 		fmt.Printf("\nВведите дату рождения в формате %s:\n", userDate.userDateString)
@@ -10,7 +10,7 @@ func getDate() dateValues {
 	}
 }
 
-//ChooseDate отвечает за выбор юзером типа времени
+// ChooseDate отвечает за выбор юзером типа времени
 func chooseDate() {
 	for {
 		fmt.Println("Формат даты:\n\t1. DD.MM.YEAR\n\t2. MM.DD.YEAR\n\t3. DD Месяц YEAR")

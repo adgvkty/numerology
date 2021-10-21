@@ -6,55 +6,55 @@ import (
 	"time"
 )
 
-//Подгрузка ресурсов в карту
+// Подгрузка ресурсов в карту
 var resources map[int]DestinyText = loadResources()
 
-//Переменная для хранения стандратной ошибки
+// Переменная для хранения стандратной ошибки
 var basicError string = "Вы ввели что-то не то"
 
-//userInputInterface - интерфейс для вводимых юзером данных
+// userInputInterface - интерфейс для вводимых юзером данных
 type userInputInterface interface {
 	scanInt() int8
 	scanDate() dateValues
 }
 
-//magicCalculationsInterface - интерфейс описывающий магические калькуляции
+// magicCalculationsInterface - интерфейс описывающий магические калькуляции
 type magicCalculationsInterface interface {
 	calcMagicNumbers(dateValues) magicNumbers
 	calcMagicStrings(magicNumbers, dateValues) magicStrings
 }
 
-//compatibilityCalculationsInterface - интерфейс описывающий магические калькуляции
+// compatibilityCalculationsInterface - интерфейс описывающий магические калькуляции
 type compatibilityCalculationsInterface interface {
 	calcComp(magicStrings, magicStrings) int
 }
 
-//compCalculations структура данных через которую считается совместимость
+// compCalculations структура данных через которую считается совместимость
 var compCalculations compatibilityCalculationsInterface = Compitability{}
 
-//magicCalculations структура данных через которую считают маг. числа
+// magicCalculations структура данных через которую считают маг. числа
 var magicCalculations magicCalculationsInterface = magicValues{}
 
-//userInput сруктура данных через которую осуществляется ввод
+// userInput сруктура данных через которую осуществляется ввод
 var userInput userInputInterface = consoleInput{}
 
-//dateFormat структура для хранения
-//Выбранного юзером типа времени
+// dateFormat структура для хранения
+// Выбранного юзером типа времени
 type dateFormat struct {
 	userDate       int8
 	userDateString string
 }
 
-//dateValues хранит числовые значения дня рождения юзера
+// dateValues хранит числовые значения дня рождения юзера
 type dateValues struct {
 	day, month, year int
 }
 
-//userDate является структурой для хранения
-//типа выбраного времени юзером
+// userDate является структурой для хранения
+// типа выбраного времени юзером
 var userDate dateFormat = dateFormat{}
 
-//Core выполняет роль главной функции программы
+// Core выполняет роль главной функции программы
 func Core() {
 	for {
 		mainMenu()
@@ -67,7 +67,7 @@ func Core() {
 	}
 }
 
-//Меню совместимости - обработка ответа юзера и вызов расчетов
+// Меню совместимости - обработка ответа юзера и вызов расчетов
 func compatibilityMenu(userMS magicStrings) {
 	for {
 		fmt.Println("\nЖелаете ли Вы узнать совместимость со своей второй половинкой?\n\t1. Да\n\t2. Нет")
@@ -93,7 +93,7 @@ func compatibilityMenu(userMS magicStrings) {
 	}
 }
 
-//Меню судьбы - вывод текстов судьбы
+// Меню судьбы - вывод текстов судьбы
 func destinyMenu(d int) {
 	fmt.Println("Наши сионские мудрецы считают Ваше магические число..")
 	time.Sleep(2 * time.Second)
@@ -108,7 +108,7 @@ func destinyMenu(d int) {
 	)
 }
 
-//Меню даты - выбор юзером даты и ввод дня рождения
+// Меню даты - выбор юзером даты и ввод дня рождения
 func dateMenu() dateValues {
 	for {
 		if userDate.userDate == 0 {
@@ -123,7 +123,7 @@ func dateMenu() dateValues {
 	}
 }
 
-//Главное меню - обработка выборов юзера
+// Главное меню - обработка выборов юзера
 func mainMenu() {
 	for {
 		fmt.Println("\nДобро пожаловать в Нумеролого-о-Метр!\n\t1. Начать работу\n\t2. Завершить работу")
@@ -140,7 +140,7 @@ func mainMenu() {
 	}
 }
 
-//ErrorCheck глобальная функция для проверки чего либо на ошибку
+// ErrorCheck глобальная функция для проверки чего либо на ошибку
 func errorCheck(err error) bool {
 	if err != nil {
 		fmt.Println(basicError)

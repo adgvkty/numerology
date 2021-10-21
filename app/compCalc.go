@@ -2,12 +2,12 @@ package app
 
 import "strings"
 
-//Compitability структура для хранения данных о совместимости
+// Compitability структура для хранения данных о совместимости
 type Compitability struct {
 	Compitability int
 }
 
-//Метод подсчета совместимости по маг. строкам
+// Метод подсчета совместимости по маг. строкам
 func (c Compitability) calcComp(uMS magicStrings, pMS magicStrings) int {
 	var comp int
 
