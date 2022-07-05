@@ -1,2 +1,2 @@
 # numerology
-Нумероло-о-метр - астрологический калькулятор.
+Numerology Calculator
